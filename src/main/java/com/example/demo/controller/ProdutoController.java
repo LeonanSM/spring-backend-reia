@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-	private static String[] ar = { "Carro", "Caminhao", "Cheve", "Moto" };
+	private static String[] ar = { " Meu Primeiro Projeto Spring!" };
 
 	@GetMapping("/lista")
 	public List<String> lista() {
