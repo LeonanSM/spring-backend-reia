@@ -1,85 +1,54 @@
 package com.example.demo.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dto.ProdutoDTO;
+import com.example.demo.entity.Produto;
+import com.example.demo.service.ProdutoService;
 
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
 
-	private static String[] ar = { " Meu Primeiro Projeto Spring!" };
+	@Autowired
+	private ProdutoService service;
 
-	@GetMapping("/lista")
-	public List<String> lista() {
+	@GetMapping("/listar")
+	public List<Produto> listar() {
 
-		return Arrays.asList(ar);
+		return service.listar();
+	}
+
+	@GetMapping("/buscar")
+	public Produto buscar(@RequestParam Long id) {
+		return service.buscar(id);
 	}
 
 	@PostMapping("/criar")
-	public String criar(@RequestBody ProdutoForm form) {
+	public Produto criar(@RequestBody ProdutoDTO dto) {
 
-		System.out.println(form);
-		return form.getNome() + " Criado";
+		return service.criar(dto);
 	}
 
 	@PutMapping("/alterar")
-	public String alterar(@RequestBody ProdutoForm form) {
+	public Produto alterar(@RequestBody ProdutoDTO dto) {
 
-		System.out.println(form);
-		return form.getNome() + " Alterado";
-	}
-}
-
-class ProdutoForm {
-
-	private Long id;
-	private String nome;
-	private String descricao;
-	private String preco;
-
-	public Long getId() {
-		return id;
+		return service.alterar(dto);
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@DeleteMapping("/excluir")
+	public void excluir(@RequestParam Long id) {
 
-	public String getNome() {
-		return nome;
+		service.excluir(id);
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getPreco() {
-		return preco;
-	}
-
-	public void setPreco(String preco) {
-		this.preco = preco;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("id: %d - nome: %s - descricao: %s - preco: %s", this.id, this.nome, this.descricao,
-				this.preco);
-	}
-
 }
