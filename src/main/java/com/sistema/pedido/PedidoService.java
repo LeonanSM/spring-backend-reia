@@ -14,4 +14,6 @@ public class PedidoService {
 	public List<Pedido> listar() {
 	return repository.findAll() ;
     }
+	
+	// verificar metodo
 }
