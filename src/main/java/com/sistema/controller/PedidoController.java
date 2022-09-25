@@ -2,6 +2,7 @@ package com.sistema.controller;
 
 import java.util.List;
 
+import com.sistema.pedido.dto.PedidoDTOListar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class PedidoController {
     private PedidoService service;
 
     @GetMapping("/listar")
-    public List<Pedido> listar(){
+    public List<PedidoDTOListar> listar(){
         return service.listar();
     }
 }
