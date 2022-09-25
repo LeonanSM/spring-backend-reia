@@ -1,16 +1,15 @@
-package com.sistema.pedido.dto.mapper;
+package com.sistema.pedido.dto;
 
 import com.sistema.pedido.Pedido;
-import com.sistema.pedido.dto.PedidoDTOListar;
-import org.hibernate.boot.jaxb.mapping.spi.Adapter10;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("spring")
 public class PedidoConverte {
+    public PedidoConverte(){}
 
-    PedidoConverte(){}
     public PedidoDTOListar toDTO(Pedido pedido){
 
         PedidoDTOListar pedidoDTO = new PedidoDTOListar();
@@ -32,3 +31,4 @@ public class PedidoConverte {
         return listaPedidoDTO;
     }
 }
+//revisar
