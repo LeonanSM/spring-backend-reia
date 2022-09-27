@@ -1,13 +1,12 @@
 package com.sistema.pedido;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-import com.sistema.entidade.Entidade;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sistema.pedidoItem.PedidoItem;
+import com.sistema.pessoa.Pessoa;
+
+import java.util.List;
 
 @Entity
 public class Pedido {
@@ -16,10 +15,15 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Entidade entidade;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private Pessoa cliente;
 	
 	private String totalPedido;
+
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
+	@JsonManagedReference
+	private List<PedidoItem> pedidoItem;
 	
 
 
@@ -31,12 +35,12 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public Entidade getEntidade() {
-		return entidade;
+	public Pessoa getCliente() {
+		return cliente;
 	}
 
-	public void setEntidade(Entidade entidade) {
-		this.entidade = entidade;
+	public void setCliente(Pessoa cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getTotalPedido() {
@@ -48,4 +52,11 @@ public class Pedido {
 	}
 
 
+	public List<PedidoItem> getPedidoItem() {
+		return pedidoItem;
+	}
+
+	public void setPedidoItem(List<PedidoItem> pedidoItem) {
+		this.pedidoItem = pedidoItem;
+	}
 }

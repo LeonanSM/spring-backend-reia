@@ -1,10 +1,10 @@
 package com.sistema.produto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sistema.pedidoItem.PedidoItem;
+
+import javax.persistence.*;
 
 @Entity
 public class Produto {
@@ -16,6 +16,14 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private String preco;
+
+
+
+	@JsonBackReference
+	@Transient
+	private PedidoItem pedidoItem;
+
+	Produto(){}
 
 	public Long getId() {
 		return id;
@@ -49,4 +57,11 @@ public class Produto {
 		this.preco = preco;
 	}
 
+	public PedidoItem getPedidoItem() {
+		return pedidoItem;
+	}
+
+	public void setPedidoItem(PedidoItem pedidoItem) {
+		this.pedidoItem = pedidoItem;
+	}
 }
