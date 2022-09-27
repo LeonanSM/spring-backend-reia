@@ -11,13 +11,14 @@ public class PedidoDTOList {
 
     private String tipo = "ListaDTO";
     private Long id;
-    private Pessoa cliente;
+    private String cliente;
+    private Long idCliente;
     private String totalPedido;
     private List<PedidoItem> pedidoItem;
 
     public PedidoDTOList(Pessoa cliente, String totalPedido) {
 
-        this.cliente = cliente;
+        this.cliente = cliente.getNome();
         this.totalPedido = totalPedido;
     }
 
@@ -33,11 +34,11 @@ public class PedidoDTOList {
         this.id = id;
     }
 
-    public Pessoa getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Pessoa cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
@@ -51,6 +52,14 @@ public class PedidoDTOList {
 
     public String getTotalPedido() {
         return totalPedido;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     public void setTotalPedido(String totalPedido) {
