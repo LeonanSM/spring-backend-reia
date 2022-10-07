@@ -1,8 +1,7 @@
 package com.sistema.produto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sistema.pedidoItem.PedidoItem;
+import com.sistema.item.Item;
 
 import javax.persistence.*;
 
@@ -12,16 +11,16 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String nome;
-	private String descricao;
+	private String grupo;
 	private String preco;
 
 
 
 	@JsonBackReference
 	@Transient
-	private PedidoItem pedidoItem;
+	private Item item;
 
 	Produto(){}
 
@@ -41,12 +40,12 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getGrupo() {
+		return grupo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
 	public String getPreco() {
@@ -57,11 +56,11 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public PedidoItem getPedidoItem() {
-		return pedidoItem;
+	public Item getPedidoItem() {
+		return item;
 	}
 
-	public void setPedidoItem(PedidoItem pedidoItem) {
-		this.pedidoItem = pedidoItem;
+	public void setPedidoItem(Item item) {
+		this.item = item;
 	}
 }

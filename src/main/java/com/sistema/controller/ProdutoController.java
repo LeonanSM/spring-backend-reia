@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.produto.Produto;
 import com.sistema.produto.ProdutoService;
-import com.sistema.produto.dto.ProdutoListDTO;
+import com.sistema.produto.dto.ProdutoDTOList;
 
 @RestController
 @RequestMapping("/produto")
@@ -35,13 +35,13 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/criar")
-	public Produto criar(@RequestBody @Validated ProdutoListDTO dto) {
+	public Produto criar(@RequestBody @Validated ProdutoDTOList dto) {
 
 		return service.criar(dto);
 	}
 
 	@PutMapping("/alterar")
-	public Produto alterar(@RequestBody ProdutoListDTO dto) {
+	public Produto alterar(@RequestBody ProdutoDTOList dto) {
 
 		return service.alterar(dto);
 	}

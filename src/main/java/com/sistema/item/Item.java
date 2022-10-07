@@ -1,14 +1,13 @@
-package com.sistema.pedidoItem;
+package com.sistema.item;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sistema.pedido.Pedido;
 import com.sistema.produto.Produto;
 
 @Entity
-public class PedidoItem {
+public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +19,9 @@ public class PedidoItem {
 	@JoinColumn(nullable = true)
 	private Produto produto;
 
+
+	private String descricao;
+
 	@Column(nullable = false)
 	private String preco;
 	
@@ -27,9 +29,9 @@ public class PedidoItem {
 	@JsonBackReference
 	private Pedido pedido;
 
-	public PedidoItem(){};
+	public Item(){};
 
-	public PedidoItem(Long id, Produto produto, String preco, Pedido pedido) {
+	public Item(Long id, Produto produto, String preco, Pedido pedido) {
 		this.id = id;
 		this.produto = produto;
 		this.preco = preco;
@@ -52,6 +54,15 @@ public class PedidoItem {
 		this.produto = produto;
 	}
 
+	public String getDescricao() {
+		this.descricao=produto.getNome();
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public String getPreco() {
 		return preco;
 	}
@@ -67,4 +78,6 @@ public class PedidoItem {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+
+
 }

@@ -16,10 +16,11 @@ public class PedidoDTOListMapper {
         PedidoDTOList pedidoDTO = new PedidoDTOList();
 
         pedidoDTO.setId(pedido.getId());
-        pedidoDTO.setCliente(pedido.getCliente().getNome());
+        pedidoDTO.setCliente(pedido.getCliente());
         pedidoDTO.setIdCliente(pedido.getCliente().getId());
         pedidoDTO.setTotalPedido(pedido.getTotalPedido());
         pedidoDTO.setPedidoItem(pedido.getPedidoItem());
+
 
         return pedidoDTO;
     }

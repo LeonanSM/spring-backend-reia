@@ -6,13 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sistema.produto.dto.ProdutoListDTO;
+import com.sistema.produto.dto.ProdutoDTOList;
 
 @Service
 public class ProdutoService {
 
 	@Autowired
-	private ProdutoRepository repository;
+	public ProdutoRepository repository;
 
 	public List<Produto> listar() {
 		return repository.findAll();
@@ -20,7 +20,7 @@ public class ProdutoService {
 
 	public Produto buscar(Long id) {
 
-		Produto resultado = null;
+		Produto resultado;
 
 		Optional<Produto> op = repository.findById(id);
 		if (op.isPresent()) {
@@ -33,27 +33,23 @@ public class ProdutoService {
 		return resultado;
 	}
 
-	public Produto criar(ProdutoListDTO dto) {
+	public Produto criar(ProdutoDTOList dto) {
 		Produto produto = new Produto();
 		produto.setNome(dto.getNome());
-		produto.setDescricao(dto.getDescricao());
+		produto.setGrupo(dto.getDescricao());
 		produto.setPreco(dto.getPreco());
 
-		Produto criado = repository.save(produto);
-
-		return criado;
+		return repository.save(produto);
 	}
 
-	public Produto alterar(ProdutoListDTO dto) {
+	public Produto alterar(ProdutoDTOList dto) {
 		Produto produto = new Produto();
 		produto.setId(dto.getId());
 		produto.setNome(dto.getNome());
-		produto.setDescricao(dto.getDescricao());
+		produto.setGrupo(dto.getDescricao());
 		produto.setPreco(dto.getPreco());
 
-		Produto alterado = repository.save(produto);
-
-		return alterado;
+		return repository.save(produto);
 	}
 
 	public void excluir(Long id) {

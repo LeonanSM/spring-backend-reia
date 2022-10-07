@@ -3,7 +3,7 @@ package com.sistema.pedido;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sistema.pedidoItem.PedidoItem;
+import com.sistema.item.Item;
 import com.sistema.pessoa.Pessoa;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
 	@JsonManagedReference
-	private List<PedidoItem> pedidoItem;
+	private List<Item> item;
 	
 
 
@@ -52,11 +52,11 @@ public class Pedido {
 	}
 
 
-	public List<PedidoItem> getPedidoItem() {
-		return pedidoItem;
+	public List<Item> getPedidoItem() {
+		return item;
 	}
 
-	public void setPedidoItem(List<PedidoItem> pedidoItem) {
-		this.pedidoItem = pedidoItem;
+	public void setPedidoItem(List<Item> item) {
+		this.item = item;
 	}
 }

@@ -1,9 +1,8 @@
 package com.sistema.pedido.dto;
 
-import com.sistema.pedidoItem.PedidoItem;
+import com.sistema.item.Item;
 import com.sistema.pessoa.Pessoa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,14 +10,14 @@ public class PedidoDTOList {
 
     private String tipo = "ListaDTO";
     private Long id;
-    private String cliente;
+    private Pessoa cliente;
     private Long idCliente;
     private String totalPedido;
-    private List<PedidoItem> pedidoItem;
+    private List<Item> item;
 
     public PedidoDTOList(Pessoa cliente, String totalPedido) {
 
-        this.cliente = cliente.getNome();
+        this.cliente = cliente;
         this.totalPedido = totalPedido;
     }
 
@@ -34,11 +33,11 @@ public class PedidoDTOList {
         this.id = id;
     }
 
-    public String getCliente() {
+    public Pessoa getCliente() {
         return cliente;
     }
 
-    public void setCliente(String cliente) {
+    public void setCliente(Pessoa cliente) {
         this.cliente = cliente;
     }
 
@@ -66,11 +65,11 @@ public class PedidoDTOList {
         this.totalPedido = totalPedido;
     }
 
-    public List<PedidoItem> getPedidoItem() {
-        return pedidoItem;
+    public List<Item> getPedidoItem() {
+        return item;
     }
 
-    public void setPedidoItem(List<PedidoItem> pedidoItem) {
-        this.pedidoItem = pedidoItem;
+    public void setPedidoItem(List<Item> item) {
+        this.item = item;
     }
 }
