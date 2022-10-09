@@ -5,6 +5,7 @@ import java.util.List;
 import com.sistema.pedido.Pedido;
 import com.sistema.pedido.dto.PedidoDTOCreate;
 import com.sistema.pedido.dto.PedidoDTOList;
+import com.sistema.pedido.dto.PedidoDTOShow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,14 @@ public class PedidoController {
         return service.buscar(id);
     }
 
+    @GetMapping("/buscarListar")
+    public PedidoDTOShow buscarListar(@RequestParam Long id) {
+
+        return service.buscarListar(id);
+    }
+
     @PostMapping("/criar")
-    public Pedido criar(@RequestBody @Validated PedidoDTOCreate dto) {
+    public Pedido criar(@RequestBody PedidoDTOCreate dto) {
 
         return service.criar(dto);
     }

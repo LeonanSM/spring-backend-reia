@@ -2,9 +2,12 @@ package com.sistema.pedido;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sistema.item.Item;
 import com.sistema.pessoa.Pessoa;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.util.List;
 
@@ -14,18 +17,13 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JsonManagedReference
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
 	private Pessoa cliente;
-	
+
+
 	private String totalPedido;
-
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
-	@JsonManagedReference
-	private List<Item> item;
-	
-
 
 	public Long getId() {
 		return id;
@@ -50,13 +48,9 @@ public class Pedido {
 	public void setTotalPedido(String totalPedido) {
 		this.totalPedido = totalPedido;
 	}
-
-
-	public List<Item> getPedidoItem() {
-		return item;
-	}
-
-	public void setPedidoItem(List<Item> item) {
-		this.item = item;
-	}
 }
+/*
+* @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
+	@JsonManagedReference
+	private List<Item> item;
+*/

@@ -11,7 +11,6 @@ public class PedidoDTOCreateMapper {
 
         pedido.setCliente(pedido.getCliente());
         pedido.setTotalPedido(pedidoDTOCreate.getTotalPedido());
-        pedido.setPedidoItem(pedidoDTOCreate.getItem());
 
         return pedido;
 

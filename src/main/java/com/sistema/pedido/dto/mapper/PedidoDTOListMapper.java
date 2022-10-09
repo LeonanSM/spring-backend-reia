@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("spring-pedido")
+@Component("spring-pedido-list")
 public class PedidoDTOListMapper {
     public PedidoDTOListMapper(){}
 
@@ -19,7 +19,7 @@ public class PedidoDTOListMapper {
         pedidoDTO.setCliente(pedido.getCliente());
         pedidoDTO.setIdCliente(pedido.getCliente().getId());
         pedidoDTO.setTotalPedido(pedido.getTotalPedido());
-        pedidoDTO.setPedidoItem(pedido.getPedidoItem());
+
 
 
         return pedidoDTO;
@@ -35,4 +35,20 @@ public class PedidoDTOListMapper {
 
         return listaPedidoDTO;
     }
+
+    public Pedido toEntity(PedidoDTOList dto){
+
+        Pedido pedido = new Pedido();
+
+        pedido.setId(dto.getId());
+        pedido.setCliente(dto.getCliente());
+        pedido.setTotalPedido(dto.getTotalPedido());
+
+
+
+        return pedido;
+    }
+
+
+
 }

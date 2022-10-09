@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.sistema.pedido.Pedido;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Pessoa {
 
 	@Id
@@ -20,11 +20,12 @@ public class Pessoa {
 
 	@Column
 	private String cpf;
-	
 
-	@Transient
+	@OneToMany(mappedBy = "cliente")
+	@JsonManagedReference
 	@JsonIgnore
-	private List<Pedido> pedidos;
+	@Transient
+	private List<Pedido> pedido;
 
 	public Long getId() {
 		return id;

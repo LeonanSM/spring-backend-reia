@@ -3,13 +3,17 @@ package com.sistema.pedido;
 import java.util.List;
 import java.util.Optional;
 
-import com.sistema.item.Item;
 import com.sistema.item.ItemRepository;
 import com.sistema.pedido.dto.PedidoDTOCreate;
 import com.sistema.pedido.dto.PedidoDTOList;
+import com.sistema.pedido.dto.PedidoDTOShow;
 import com.sistema.pedido.dto.mapper.PedidoDTOListMapper;
+import com.sistema.pedido.dto.mapper.PedidoDTOShowMapper;
+import com.sistema.pessoa.Pessoa;
+import com.sistema.pessoa.PessoaService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
@@ -22,14 +26,13 @@ public class PedidoService {
     @Autowired
     PedidoRepository repository;
 
+    @Autowired
+    PessoaService clienteService;
+
 
     @Autowired
     PedidoDTOListMapper pedidoDTOListMapper;
-
-    @Autowired
-    ItemRepository itemRepository;
-
-
+    PedidoDTOShowMapper pedidoDTOShowMapper;
 
 
     public List<PedidoDTOList> listar() {
@@ -39,6 +42,7 @@ public class PedidoService {
 
 
     public Pedido buscar(Long id) {
+
         Pedido resultado;
 
         Optional<Pedido> op = repository.findById(id);
@@ -50,20 +54,29 @@ public class PedidoService {
             throw  new RuntimeException("Pedido não localizado!");
         }
 
-        return  resultado;
+        return resultado;
     }
 
-    @Transactional
-    public Pedido criar(@NotNull PedidoDTOCreate dto) {
 
+    public PedidoDTOShow buscarListar(Long id) {
+
+        Optional<Pedido> pedidoListar = repository.findById(id);
+
+        PedidoDTOShow dtoShow = pedidoDTOShowMapper.toDTO(pedidoListar.get());
+
+        return dtoShow;
+    }
+
+
+
+    @Transactional
+    public Pedido criar(PedidoDTOCreate dto) {
+
+       Pessoa cliente = clienteService.buscar(dto.getIdCliente());
         Pedido pedido = new Pedido();
-        pedido.setCliente(dto.getCliente());
-        pedido.setPedidoItem(dto.getItem());
+        pedido.setCliente(cliente);
         pedido.setTotalPedido(dto.getTotalPedido());
         repository.save(pedido);
-
-        List<Item> items = dto.getItem();
-        itemRepository.saveAll(items);
 
         return pedido;
 }
