@@ -18,6 +18,7 @@ public class Produto {
 
 
 
+	@OneToOne
 	@JsonBackReference
 	@Transient
 	private Item item;

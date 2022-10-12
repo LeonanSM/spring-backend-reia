@@ -17,8 +17,7 @@ public class Item {
 
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JsonBackReference
-	@JoinColumn(nullable = true)
+	@JoinColumn(name = "produto_id")
 	private Produto produto;
 
 	@ManyToOne
