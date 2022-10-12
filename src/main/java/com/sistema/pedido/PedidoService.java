@@ -2,8 +2,7 @@ package com.sistema.pedido;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.sistema.item.ItemRepository;
+import com.sistema.item.ItemService;
 import com.sistema.pedido.dto.PedidoDTOCreate;
 import com.sistema.pedido.dto.PedidoDTOList;
 import com.sistema.pedido.dto.PedidoDTOShow;
@@ -13,7 +12,6 @@ import com.sistema.pessoa.Pessoa;
 import com.sistema.pessoa.PessoaService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
@@ -24,31 +22,40 @@ import javax.transaction.Transactional;
 public class PedidoService {
 
     @Autowired
-    PedidoRepository repository;
+   private PedidoRepository pedidoRepository;
 
     @Autowired
-    PessoaService clienteService;
+    private PedidoRepository itemRepository;
+
+    @Autowired
+   private PessoaService clienteService;
+
+    @Autowired
+    private ItemService itemService;
 
 
     @Autowired
     PedidoDTOListMapper pedidoDTOListMapper;
+
+    @Autowired
     PedidoDTOShowMapper pedidoDTOShowMapper;
 
 
-    public List<PedidoDTOList> listar() {
-
-        return pedidoDTOListMapper.toDTOList(repository.findAll()) ;
+    public List<Pedido> listar() {
+        return pedidoRepository.findAll() ;
     }
 
 
+    @Transactional
     public Pedido buscar(Long id) {
 
         Pedido resultado;
 
-        Optional<Pedido> op = repository.findById(id);
-        if (op.isPresent()){
+        Optional<Pedido> pedido = pedidoRepository.findById(id);
+        if (pedido.isPresent()){
 
-            resultado = op.get();
+
+            resultado = pedido.get();
         }
         else {
             throw  new RuntimeException("Pedido não localizado!");
@@ -60,8 +67,7 @@ public class PedidoService {
 
     public PedidoDTOShow buscarListar(Long id) {
 
-        Optional<Pedido> pedidoListar = repository.findById(id);
-
+        Optional<Pedido> pedidoListar = pedidoRepository.findById(id);
         PedidoDTOShow dtoShow = pedidoDTOShowMapper.toDTO(pedidoListar.get());
 
         return dtoShow;
@@ -76,7 +82,7 @@ public class PedidoService {
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
         pedido.setTotalPedido(dto.getTotalPedido());
-        repository.save(pedido);
+        pedidoRepository.save(pedido);
 
         return pedido;
 }
@@ -88,12 +94,12 @@ public class PedidoService {
         pedido.setCliente(dto.getCliente());
 
 
-        return repository.save(pedido);
+        return pedidoRepository.save(pedido);
     }
 
     public void excluir(Long id) {
 
-    repository.deleteById(id);
+        pedidoRepository.deleteById(id);
 
     }
 

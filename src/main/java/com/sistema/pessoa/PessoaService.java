@@ -2,7 +2,6 @@ package com.sistema.pessoa;
 
 import com.sistema.pessoa.dto.PessoaDTOList;
 import com.sistema.pessoa.dto.mapper.PessoaDTOListMapper;
-import com.sistema.produto.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

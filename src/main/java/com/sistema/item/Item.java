@@ -3,6 +3,8 @@ package com.sistema.item;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sistema.pedido.Pedido;
 import com.sistema.produto.Produto;
 
@@ -19,24 +21,19 @@ public class Item {
 	@JoinColumn(nullable = true)
 	private Produto produto;
 
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", columnDefinition = "bigint")
+	@JsonIgnore
+	private Pedido pedido;
+
 
 	private String descricao;
 
 	@Column(nullable = false)
 	private String preco;
-	
-	@ManyToOne()
-	@JsonBackReference
-	private Pedido pedido;
 
 	public Item(){};
 
-	public Item(Long id, Produto produto, String preco, Pedido pedido) {
-		this.id = id;
-		this.produto = produto;
-		this.preco = preco;
-		this.pedido = pedido;
-	}
 
 	public Long getId() {
 		return id;
@@ -54,8 +51,15 @@ public class Item {
 		this.produto = produto;
 	}
 
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
 	public String getDescricao() {
-		this.descricao=produto.getNome();
 		return descricao;
 	}
 
@@ -70,14 +74,4 @@ public class Item {
 	public void setPreco(String preco) {
 		this.preco = preco;
 	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
-
 }

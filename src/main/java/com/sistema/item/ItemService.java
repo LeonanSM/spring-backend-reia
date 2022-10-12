@@ -3,15 +3,20 @@ package com.sistema.item;
 import com.sistema.item.dto.ItemDTOCreate;
 import com.sistema.produto.Produto;
 import com.sistema.produto.dto.ProdutoDTOList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ItemService {
 
+    @Autowired
     private ItemRepository repository;
+
     public List<Item> listar() {
         return repository.findAll();
     }

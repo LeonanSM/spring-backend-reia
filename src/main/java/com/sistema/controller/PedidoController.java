@@ -20,7 +20,7 @@ public class PedidoController {
     private PedidoService service;
 
     @GetMapping("/listar")
-    public List<PedidoDTOList> listar(){
+    public List<Pedido> listar(){
         return service.listar();
     }
 

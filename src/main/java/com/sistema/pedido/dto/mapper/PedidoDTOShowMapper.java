@@ -1,10 +1,14 @@
 package com.sistema.pedido.dto.mapper;
 
+import com.sistema.item.Item;
 import com.sistema.pedido.Pedido;
 import com.sistema.pedido.dto.PedidoDTOShow;
 import org.springframework.stereotype.Component;
 
-@Component("spring-pedido-show")
+import java.util.ArrayList;
+import java.util.List;
+
+@Component("spring-pedidoshow")
 public class PedidoDTOShowMapper {
     public PedidoDTOShowMapper(){}
 
@@ -13,8 +17,8 @@ public class PedidoDTOShowMapper {
         PedidoDTOShow pedidoDTO = new PedidoDTOShow();
 
         pedidoDTO.setId(pedido.getId());
-        pedidoDTO.setCliente(pedido.getCliente());
-        pedidoDTO.setTotalPedido(pedido.getTotalPedido());
+        pedidoDTO.setCliente(pedido.getCliente())
+        ;pedidoDTO.setTotalPedido(pedido.getTotalPedido());
 
 
 
@@ -33,10 +37,9 @@ public class PedidoDTOShowMapper {
 
         return pedido;
     }
-}
 
-/*
-*     public List<PedidoDTOShow> toDTOList(List<Pedido> dtos){
+
+    public List<PedidoDTOShow> toDTOList(List<Pedido> dtos){
 
         List<PedidoDTOShow> listaPedidoDTO = new ArrayList<>(dtos.size());
         for (Pedido pedido: dtos) {
@@ -47,4 +50,4 @@ public class PedidoDTOShowMapper {
         return listaPedidoDTO;
     }
 
-* */
+}

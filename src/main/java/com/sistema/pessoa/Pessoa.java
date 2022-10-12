@@ -21,9 +21,9 @@ public class Pessoa {
 	@Column
 	private String cpf;
 
+
 	@OneToMany(mappedBy = "cliente")
-	@JsonManagedReference
-	@JsonIgnore
+	@JsonBackReference
 	@Transient
 	private List<Pedido> pedido;
 

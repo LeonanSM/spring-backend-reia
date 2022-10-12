@@ -1,6 +1,8 @@
 package com.sistema.pedido.dto;
 
 import com.sistema.item.Item;
+import com.sistema.item.ItemService;
+import com.sistema.pedido.PedidoService;
 import com.sistema.pessoa.Pessoa;
 
 import java.util.List;
@@ -15,11 +17,6 @@ public class PedidoDTOShow {
     private String totalPedido;
     private List<Item> item;
 
-    public PedidoDTOShow(Pessoa cliente, String totalPedido) {
-
-        this.cliente = cliente;
-        this.totalPedido = totalPedido;
-    }
 
     public PedidoDTOShow() {
 
@@ -65,11 +62,11 @@ public class PedidoDTOShow {
         this.totalPedido = totalPedido;
     }
 
-    public List<Item> getPedidoItem() {
+    public List<Item> getItem() {
         return item;
     }
 
-    public void setPedidoItem(List<Item> item) {
+    public void setItem(List<Item> item) {
         this.item = item;
     }
 }
